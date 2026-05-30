@@ -17,7 +17,7 @@ export interface ProductoResponse {
 }
 
 export type ProductoEnCarrito = Producto & {
-  quantity: number
+  cantidad: number
 }
 
 export type ProductoPreview = Pick<
