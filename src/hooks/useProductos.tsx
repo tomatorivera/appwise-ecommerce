@@ -9,3 +9,11 @@ export function useProductos() {
     productos,
   }
 }
+
+export function useProducto(id: number) {
+  const producto = MOCK_PRODUCTOS.find((producto) => producto.id === id)
+
+  return {
+    producto,
+  }
+}

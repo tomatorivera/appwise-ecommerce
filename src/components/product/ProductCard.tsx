@@ -19,7 +19,7 @@ const ProductCard = ({ producto }: ProductCardProps) => {
         <p className="text-2xl font-bold text-green-600">${producto.price}</p>
 
         <Link
-          to={`/productos/${producto.id}`}
+          to={`/producto/${producto.id}`}
           className="mt-auto text-sm font-medium text-blue-600 hover:underline"
         >
           Leer más →
