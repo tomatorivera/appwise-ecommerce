@@ -10,7 +10,7 @@ const DetalleProducto = () => {
   }
 
   return (
-    <main className="max-w-7xl mx-auto p-4">
+    <main>
       <section className="flex justify-center items-stretch gap-2 border border-gray-300 flex-col md:flex-row">
         <figure className="w-full md:w-1/2">
           <img
