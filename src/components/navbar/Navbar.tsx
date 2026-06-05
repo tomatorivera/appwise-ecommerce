@@ -42,9 +42,17 @@ const Navbar = () => {
           </li>
         </ul>
 
-        <section className="flex items-center gap-5">
-          <button className="cursor-pointer">
-            <ShoppingCart className="text-white hover:text-emerald-100 transition-colors" />
+        <section className="flex items-center gap-7">
+          <button className="cursor-pointer relative">
+            <ShoppingCart
+              size={25}
+              className="text-white hover:text-emerald-100 transition-colors"
+            />
+
+            {/* Todo: actualizar la cantidad dinámicamente */}
+            <span className="absolute -top-3.75 -right-4.25 bg-white text-sm rounded-full p-0.75 text-emerald-700">
+              10
+            </span>
           </button>
           <button className="bg-white px-3 py-1 rounded-2xl text-emerald-700 cursor-pointer hover:bg-emerald-50 transition-colors">
             Ingresar
