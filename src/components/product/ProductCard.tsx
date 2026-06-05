@@ -7,7 +7,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ producto }: ProductCardProps) => {
   return (
-    <article className="overflow-hidden border border-gray-300 bg-white w-full">
+    <article className="overflow-hidden border border-gray-300 bg-white w-full h-full">
       <img
         src={producto.thumbnail}
         alt={producto.title}

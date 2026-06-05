@@ -6,7 +6,7 @@ const Catalogo = () => {
   const { productos } = useProductos()
 
   return (
-    <main className="max-w-7xl mx-auto p-4">
+    <main>
       <h1 className="font-bold text-4xl">Catálogo de productos</h1>
 
       <ItemsGrid
