@@ -1,9 +1,9 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { useProducto } from '../hooks/useProductos'
+import { useProductoMock } from '../hooks/useProductos'
 
 const DetalleProducto = () => {
   const { id } = useParams()
-  const { producto } = useProducto(Number(id))
+  const { producto } = useProductoMock(Number(id))
 
   if (!producto) {
     return <Navigate to="/catalogo" replace />
