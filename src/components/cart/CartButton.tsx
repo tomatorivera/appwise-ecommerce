@@ -1,11 +1,19 @@
 import { ShoppingCart } from 'react-feather'
+import { useToggle } from '../../hooks/useToggle'
 
 const CartButton = () => {
-  const isOpen = true // Todo: reemplazar por useToggle
+  const {
+    value: isOpen,
+    activate: openDropdown,
+    deactivate: closeDropdown,
+  } = useToggle()
 
   return (
     <div className="relative">
-      <button className="cursor-pointer relative flex items-center">
+      <button
+        className="cursor-pointer relative flex items-center"
+        onClick={() => (isOpen ? closeDropdown() : openDropdown())}
+      >
         <ShoppingCart
           size={25}
           className="text-white hover:text-emerald-100 transition-colors"
