@@ -1,6 +1,6 @@
 import { createContext, useCallback, useMemo, type ReactNode } from 'react'
 import { CarritoContextValue } from '../../types/carrito.types'
-import { Producto, ProductoEnCarrito } from '../../types/producto.types'
+import { ProductoEnCarrito, ProductoPreview } from '../../types/producto.types'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 
 export const CarritoContext = createContext<CarritoContextValue | undefined>(
@@ -16,7 +16,7 @@ export function CarritoProvider({ children }: { children: ReactNode }) {
   )
 
   const agregarItem = useCallback(
-    (producto: Producto) => {
+    (producto: ProductoPreview) => {
       setItems((prev) => {
         const existente = prev.find((item) => item.id === producto.id)
         if (existente) {
