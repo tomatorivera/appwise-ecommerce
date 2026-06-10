@@ -1,12 +1,19 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { useProductoMock } from '../hooks/useProductos'
+import { useCarrito } from '../features/carrito/useCarrito'
 
 const DetalleProducto = () => {
   const { id } = useParams()
   const { producto } = useProductoMock(Number(id))
+  const { agregarItem } = useCarrito()
 
+  // Todo: hacer una página que indique el error
   if (!producto) {
     return <Navigate to="/catalogo" replace />
+  }
+
+  const handleAddToCart = () => {
+    agregarItem(producto)
   }
 
   return (
@@ -21,6 +28,12 @@ const DetalleProducto = () => {
         </figure>
         <div className="flex-1 p-5 flex flex-col justify-center">
           <div>
+            <Link
+              to="/catalogo"
+              className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:underline mb-6"
+            >
+              ← Volver al catálogo
+            </Link>
             <span className="bg-blue-200 border border-blue-500 px-3 py-1 inline-block rounded-4xl text-blue-700">
               #{producto.category}
             </span>
@@ -43,12 +56,12 @@ const DetalleProducto = () => {
             <button className="bg-green-600 inline-block text-white py-2 px-4 rounded-xl cursor-pointer hover:bg-green-700 transition-colors">
               Comprar ahora
             </button>
-            <Link
-              to="/catalogo"
-              className="inline-block text-sm font-medium text-blue-600 hover:underline"
+            <button
+              onClick={handleAddToCart}
+              className="bg-white inline-block text-green-600 border border-green-600 py-2 px-4 rounded-xl cursor-pointer hover:border-green-700 hover:text-green-700 transition-colors"
             >
-              Volver al catálogo
-            </Link>
+              Agregar al carrito
+            </button>
           </div>
 
           <p>
