@@ -1,11 +1,19 @@
 import { Link } from 'react-router-dom'
 import { ProductoPreview } from '../../types/producto.types'
+import { useCarrito } from '../../features/carrito/useCarrito'
 
 interface ProductCardProps {
   producto: ProductoPreview
 }
 
 const ProductCard = ({ producto }: ProductCardProps) => {
+  const { agregarItem } = useCarrito()
+
+  const handleAddItemToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    agregarItem(producto)
+  }
+
   return (
     <Link
       to={`/producto/${producto.id}`}
@@ -31,7 +39,7 @@ const ProductCard = ({ producto }: ProductCardProps) => {
           <div>
             <button
               className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl cursor-pointer"
-              // onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleAddItemToCart(producto.title, e)}
+              onClick={handleAddItemToCart}
             >
               Agregar al carrito
             </button>
