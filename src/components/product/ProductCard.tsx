@@ -1,17 +1,19 @@
 import { Link } from 'react-router-dom'
 import { ProductoPreview } from '../../types/producto.types'
-import { useCarrito } from '../../features/carrito/useCarrito'
+import React from 'react'
 
 interface ProductCardProps {
   producto: ProductoPreview
+  agregarCarrito: (producto: ProductoPreview) => void
 }
 
-const ProductCard = ({ producto }: ProductCardProps) => {
-  const { agregarItem } = useCarrito()
-
+const ProductCard = React.memo(function ({
+  producto,
+  agregarCarrito,
+}: ProductCardProps) {
   const handleAddItemToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    agregarItem(producto)
+    agregarCarrito(producto)
   }
 
   return (
@@ -48,6 +50,6 @@ const ProductCard = ({ producto }: ProductCardProps) => {
       </article>
     </Link>
   )
-}
+})
 
 export default ProductCard

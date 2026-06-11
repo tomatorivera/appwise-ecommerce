@@ -1,9 +1,11 @@
 import ItemsGrid from '../components/ItemsGrid'
 import ProductCard from '../components/product/ProductCard'
+import { useCarrito } from '../features/carrito/useCarrito'
 import { useProductos } from '../hooks/useProductos'
 
 const Catalogo = () => {
   const status = useProductos()
+  const { agregarItem } = useCarrito()
 
   return (
     <main>
@@ -16,7 +18,11 @@ const Catalogo = () => {
         <ItemsGrid
           items={status.data.products}
           renderItem={(producto) => (
-            <ProductCard key={producto.id} producto={producto} />
+            <ProductCard
+              key={producto.id}
+              producto={producto}
+              agregarCarrito={agregarItem}
+            />
           )}
         />
       )}
