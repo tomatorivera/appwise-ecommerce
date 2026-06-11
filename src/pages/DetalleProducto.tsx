@@ -1,74 +1,22 @@
-import { Link, Navigate, useParams } from 'react-router-dom'
-import { useProductoMock } from '../hooks/useProductos'
-import { useCarrito } from '../features/carrito/useCarrito'
+import { useParams } from 'react-router-dom'
+import { useProduct } from '../hooks/useProductos'
+import ProductDetail from '../components/product/ProductDetail'
 
 const DetalleProducto = () => {
   const { id } = useParams()
-  const { producto } = useProductoMock(Number(id))
-  const { agregarItem } = useCarrito()
-
-  // Todo: hacer una página que indique el error
-  if (!producto) {
-    return <Navigate to="/catalogo" replace />
-  }
-
-  const handleAddToCart = () => {
-    agregarItem(producto)
-  }
+  const response = useProduct(Number(id))
 
   return (
     <main>
-      <section className="flex justify-center items-stretch gap-2 border border-gray-300 flex-col md:flex-row">
-        <figure className="w-full md:w-1/2">
-          <img
-            src={producto.thumbnail}
-            alt={`Imagen del producto ${producto.title}`}
-            className="object-cover h-full w-full"
-          />
-        </figure>
-        <div className="flex-1 p-5 flex flex-col justify-center">
-          <div>
-            <Link
-              to="/catalogo"
-              className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:underline mb-6"
-            >
-              ← Volver al catálogo
-            </Link>
-            <span className="bg-blue-200 border border-blue-500 px-3 py-1 inline-block rounded-4xl text-blue-700">
-              #{producto.category}
-            </span>
-          </div>
+      {/* Todo: skeleton  */}
+      {response.status == 'loading' && <p>Cargando...</p>}
 
-          <div className="my-4">
-            <h1 className="font-bold text-2xl">{producto.title}</h1>
-            <p className="text-gray-500">
-              Valorado en <strong>{producto.rating}</strong>/<strong>5</strong>{' '}
-              ★
-            </p>
-          </div>
+      {/* Todo: error page */}
+      {response.status == 'error' && <p>Error</p>}
 
-          <p className="font-bold text-5xl text-blue-500">
-            $ {producto.price.toFixed(2)}
-          </p>
-          <p className="my-6 text-gray-600">{producto.description}</p>
-
-          <div className="my-4 flex items-center gap-4">
-            <button className="bg-green-600 inline-block text-white py-2 px-4 rounded-xl cursor-pointer hover:bg-green-700 transition-colors">
-              Comprar ahora
-            </button>
-            <button
-              onClick={handleAddToCart}
-              className="bg-white inline-block text-green-600 border border-green-600 py-2 px-4 rounded-xl cursor-pointer hover:border-green-700 hover:text-green-700 transition-colors"
-            >
-              Agregar al carrito
-            </button>
-          </div>
-
-          <p>
-            🔥 <strong>{producto.stock}</strong> unidades restantes
-          </p>
-        </div>
-      </section>
+      {response.status == 'success' && (
+        <ProductDetail producto={response.data} />
+      )}
     </main>
   )
 }
