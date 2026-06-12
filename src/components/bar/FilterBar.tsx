@@ -1,11 +1,22 @@
+import { ChangeEvent } from 'react'
 import { useCategorias } from '../../hooks/useCategorias'
 
 interface Props {
   className?: string
+  setCategorias: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-const FilterBar = ({ className = '' }: Props) => {
+const FilterBar = ({ setCategorias, className = '' }: Props) => {
   const responseCategorias = useCategorias()
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const category = e.target.value
+    setCategorias((prev) => {
+      return e.target.checked
+        ? [...prev, category]
+        : prev.filter((c) => c !== category)
+    })
+  }
 
   if (responseCategorias.status === 'error')
     console.error(responseCategorias.error)
@@ -33,6 +44,8 @@ const FilterBar = ({ className = '' }: Props) => {
                     type="checkbox"
                     name={`cat-${index}`}
                     id={`cat-${index}`}
+                    onChange={(e) => handleChange(e)}
+                    value={category}
                   />
                   <label htmlFor={`cat-${index}`}>{category}</label>
                 </li>
