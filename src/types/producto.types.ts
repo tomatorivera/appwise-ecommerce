@@ -16,11 +16,11 @@ export interface ProductoResponse {
   limit: number
 }
 
-export type ProductoEnCarrito = Producto & {
+export type ProductoEnCarrito = ProductoPreview & {
   cantidad: number
 }
 
 export type ProductoPreview = Pick<
   Producto,
-  'id' | 'title' | 'price' | 'thumbnail'
+  'id' | 'title' | 'price' | 'thumbnail' | 'stock'
 >

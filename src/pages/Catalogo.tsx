@@ -1,20 +1,35 @@
 import ItemsGrid from '../components/ItemsGrid'
 import ProductCard from '../components/product/ProductCard'
+import SearchBar from '../components/bar/SearchBar'
+import { useCarrito } from '../features/carrito/useCarrito'
 import { useProductos } from '../hooks/useProductos'
 
 const Catalogo = () => {
-  const { productos } = useProductos()
+  const status = useProductos()
+  const { agregarItem } = useCarrito()
 
   return (
-    <main className="max-w-7xl mx-auto p-4">
+    <main>
       <h1 className="font-bold text-4xl">Catálogo de productos</h1>
 
-      <ItemsGrid
-        items={productos}
-        renderItem={(producto) => (
-          <ProductCard key={producto.id} producto={producto} />
-        )}
-      />
+      {status.status === 'loading' && <p>Cargando...</p>}
+      {status.status === 'error' && <p>Error cargando los productos</p>}
+
+      {status.status === 'success' && (
+        <>
+          <SearchBar className="my-4" />
+          <ItemsGrid
+            items={status.data.products}
+            renderItem={(producto) => (
+              <ProductCard
+                key={producto.id}
+                producto={producto}
+                agregarCarrito={agregarItem}
+              />
+            )}
+          />
+        </>
+      )}
     </main>
   )
 }
