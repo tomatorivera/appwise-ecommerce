@@ -22,7 +22,7 @@ const ProductDetail = ({ producto }: { producto: Producto }) => {
       <div className="flex-1 p-5 flex flex-col justify-center">
         <div>
           <Link
-            to="/catalogo"
+            to="/"
             className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:underline mb-6"
           >
             ← Volver al catálogo
