@@ -1,6 +1,6 @@
 import ItemsGrid from '../components/ItemsGrid'
 import ProductCard from '../components/product/ProductCard'
-import SearchBar from '../components/SearchBar'
+import SearchBar from '../components/bar/SearchBar'
 import { useCarrito } from '../features/carrito/useCarrito'
 import { useProductos } from '../hooks/useProductos'
 
@@ -17,7 +17,7 @@ const Catalogo = () => {
 
       {status.status === 'success' && (
         <>
-          <SearchBar className="mt-4" />
+          <SearchBar className="my-4" />
           <ItemsGrid
             items={status.data.products}
             renderItem={(producto) => (
