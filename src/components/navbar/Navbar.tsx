@@ -13,20 +13,12 @@ const Navbar = () => {
               to="/"
               className="cursor-pointer hover:underline hover:text-emerald-100 transition-all"
             >
-              Inicio
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/catalogo"
-              className="cursor-pointer hover:underline hover:text-emerald-100 transition-all"
-            >
               Catálogo
             </Link>
           </li>
           <li>
             <Link
-              to="/catalogo"
+              to="?category=favs"
               className="cursor-pointer hover:underline hover:text-emerald-100 transition-all"
             >
               Favoritos
@@ -34,7 +26,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/catalogo"
+              to="?category=offers"
               className="cursor-pointer hover:underline hover:text-emerald-100 transition-all"
             >
               Ofertas

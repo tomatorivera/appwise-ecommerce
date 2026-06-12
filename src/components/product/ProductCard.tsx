@@ -18,7 +18,7 @@ const ProductCard = React.memo(function ({
 
   return (
     <Link
-      to={`/producto/${producto.id}`}
+      to={`/productos/${producto.id}`}
       className="mt-auto text-sm font-medium w-full h-full"
     >
       <article className="overflow-hidden border border-gray-300 bg-white w-full h-full flex flex-col">

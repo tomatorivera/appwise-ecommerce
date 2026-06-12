@@ -1,24 +1,24 @@
 import { createBrowserRouter } from 'react-router-dom'
-import App from '../App'
 import Catalogo from '../pages/Catalogo'
 import DetalleProducto from '../pages/DetalleProducto'
 import MainLayout from '../layouts/MainLayout'
+import BusquedaProducto from '../pages/BusquedaProducto'
 
 export const router = createBrowserRouter([
   {
     element: <MainLayout />,
     children: [
       {
-        element: <App />,
+        element: <Catalogo />,
         path: '/',
       },
       {
-        element: <Catalogo />,
-        path: '/catalogo',
+        element: <BusquedaProducto />,
+        path: '/productos',
       },
       {
         element: <DetalleProducto />,
-        path: '/producto/:id',
+        path: '/productos/:id',
       },
     ],
   },
