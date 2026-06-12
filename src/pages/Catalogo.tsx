@@ -1,5 +1,6 @@
 import ItemsGrid from '../components/ItemsGrid'
 import ProductCard from '../components/product/ProductCard'
+import SearchBar from '../components/SearchBar'
 import { useCarrito } from '../features/carrito/useCarrito'
 import { useProductos } from '../hooks/useProductos'
 
@@ -15,16 +16,19 @@ const Catalogo = () => {
       {status.status === 'error' && <p>Error cargando los productos</p>}
 
       {status.status === 'success' && (
-        <ItemsGrid
-          items={status.data.products}
-          renderItem={(producto) => (
-            <ProductCard
-              key={producto.id}
-              producto={producto}
-              agregarCarrito={agregarItem}
-            />
-          )}
-        />
+        <>
+          <SearchBar className="mt-4" />
+          <ItemsGrid
+            items={status.data.products}
+            renderItem={(producto) => (
+              <ProductCard
+                key={producto.id}
+                producto={producto}
+                agregarCarrito={agregarItem}
+              />
+            )}
+          />
+        </>
       )}
     </main>
   )
