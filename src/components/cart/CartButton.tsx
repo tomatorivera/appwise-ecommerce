@@ -9,8 +9,14 @@ const CartButton = () => {
     deactivate: closeDropdown,
   } = useToggle()
 
-  const { items, quitarItem, cambiarCantidad, totalItems, totalPrecio } =
-    useCarrito()
+  const {
+    items,
+    quitarItem,
+    cambiarCantidad,
+    vaciarCarrito,
+    totalItems,
+    totalPrecio,
+  } = useCarrito()
 
   const handleRemoveFromCart = (productId: number) => {
     quitarItem(productId)
@@ -18,6 +24,10 @@ const CartButton = () => {
 
   const handleQuantityChange = (productId: number, quantity: number) => {
     cambiarCantidad(productId, quantity)
+  }
+
+  const handleClearCart = () => {
+    vaciarCarrito()
   }
 
   return (
@@ -104,6 +114,12 @@ const CartButton = () => {
 
             <button className="w-full rounded bg-emerald-600 py-2 text-white hover:bg-emerald-700 transition-colors cursor-pointer">
               Finalizar compra
+            </button>
+            <button
+              className="w-full mt-2 rounded border border-red-600 text-red-600 py-2 hover:border-red-900 hover:text-red-900 transition-colors cursor-pointer"
+              onClick={handleClearCart}
+            >
+              Vaciar carrito
             </button>
           </div>
         </div>
