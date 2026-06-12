@@ -9,10 +9,15 @@ const CartButton = () => {
     deactivate: closeDropdown,
   } = useToggle()
 
-  const { items, quitarItem, totalItems, totalPrecio } = useCarrito()
+  const { items, quitarItem, cambiarCantidad, totalItems, totalPrecio } =
+    useCarrito()
 
   const handleRemoveFromCart = (productId: number) => {
     quitarItem(productId)
+  }
+
+  const handleQuantityChange = (productId: number, quantity: number) => {
+    cambiarCantidad(productId, quantity)
   }
 
   return (
@@ -37,7 +42,7 @@ const CartButton = () => {
             {items.length > 0 ? (
               items.map((producto) => {
                 return (
-                  <li className="flex gap-3 p-4 pb-0">
+                  <li className="flex gap-3 p-4 pb-0" key={producto.id}>
                     <img
                       src={producto.thumbnail}
                       alt={`Imagen del producto: ${producto.title}`}
@@ -50,14 +55,26 @@ const CartButton = () => {
                       </h3>
 
                       <p className="text-sm text-gray-500">
-                        Cantidad: {producto.cantidad}
-                      </p>
-                      <p className="text-sm text-gray-500">
                         Precio unitario: ${producto.price}
                       </p>
                       <p className="font-semibold text-emerald-700">
                         ${(producto.price * producto.cantidad).toFixed(2)}
                       </p>
+
+                      <section className="text-sm max-w-full flex mt-2 gap-3">
+                        <p>Cantidad:</p>
+                        <input
+                          type="number"
+                          value={producto.cantidad}
+                          onChange={(e) =>
+                            handleQuantityChange(
+                              producto.id,
+                              Number(e.target.value)
+                            )
+                          }
+                          className="w-[55px] border border-gray-300 ps-1"
+                        />
+                      </section>
 
                       <button
                         className="cursor-pointer"
